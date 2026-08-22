@@ -1,111 +1,2448 @@
+@import url(
+  "https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Space+Mono:wght@400;700&display=swap"
+);
+
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  --bg: #111;
+  --panel: #171717;
+  --text: #dedbd4;
+  --muted: #96938d;
+  --line: #85837e;
+  --pink: #ff7777;
+  --green: #155d1d;
+  --blue: #174d6a;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-body {
-  margin: 0;
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+* {
   box-sizing: border-box;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
   margin: 0;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+body {
+  background: #111;
+  color: var(--text);
+
+  font-family:
+    "Patrick Hand",
+    "Comic Sans MS",
+    cursive;
 }
 
-code {
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+input,
+textarea,
+select {
+  color: var(--text);
+}
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar {
+  height: 76px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 30px;
+
+  border-bottom: 1px solid #777;
+
+  background: #111;
+
+  position: sticky;
+  top: 0;
+
+  z-index: 100;
+
+  gap: 35px;
+}
+
+.navbar-brand {
+  min-width: 180px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  cursor: pointer;
+}
+
+.brand-logo {
+  width: 40px;
+  height: 40px;
+
+  border: 1px solid #aaa;
+
+  border-radius: 50%;
+
+  display: grid;
+  place-items: center;
+
+  background: #633b3b;
+
+  font-size: 23px;
+}
+
+.brand-name {
+  font-size: 25px;
+  line-height: 20px;
+}
+
+.brand-subtitle {
+  color: #777;
+
+  font-family:
+    "Space Mono",
+    monospace;
+
+  font-size: 9px;
+
+  letter-spacing: 3px;
+}
+
+.nav-links {
+  display: flex;
+
+  flex: 1;
+
+  gap: 5px;
+}
+
+.nav-link {
+  background: transparent;
+
+  border: 1px solid transparent;
+
+  color: #999;
+
+  padding: 9px 16px;
+
+  font-size: 18px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #eee;
+
+  border-color: #777;
+
+  background: #1a1a1a;
+}
+
+.navbar-right {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+}
+
+.admin-label {
+  color: #888;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: var(--pink);
+
+  color: #222;
+}
+
+/* =====================================================
+   PAGES
+===================================================== */
+
+.page {
+  max-width: 1450px;
+
+  margin: auto;
+
+  padding: 45px 45px 100px;
+}
+
+.page-header {
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  margin-bottom: 25px;
+}
+
+.eyebrow {
+  color: #aaa;
+
+  font-size: 14px;
+
+  letter-spacing: 2px;
+}
+
+h1 {
+  margin: 4px 0;
+
+  font-size: 46px;
+
+  font-weight: 400;
+
+  line-height: 1;
+}
+
+.page-header p {
+  color: var(--muted);
+
+  margin: 8px 0;
+
+  font-size: 17px;
+}
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.wire-card {
+  background:
+    linear-gradient(
+      140deg,
+      rgba(255,255,255,.025),
+      transparent
+    );
+
+  border: 1px solid #92918c;
+
+  padding: 22px;
+
+  position: relative;
+
+  box-shadow:
+    5px 5px 0 rgba(255,255,255,.025);
+}
+
+.wire-card::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 5px;
+
+  border: 1px dashed
+    rgba(255,255,255,.025);
+
+  pointer-events: none;
+}
+
+.primary-button {
+  background: #ddd8cf;
+
+  color: #151515;
+
+  border: 1px solid white;
+
+  padding: 10px 17px;
+
+  box-shadow: 4px 4px 0 #555;
+}
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.search-bar {
+  margin-bottom: 18px;
+}
+
+.search-bar input {
+  width: 390px;
+
+  background: #141414;
+
+  border: 1px solid #777;
+
+  padding: 10px 13px;
+
+  outline: none;
+
+  color: white;
+}
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.table-wrapper {
+  padding: 0;
+
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+
+  min-width: 850px;
+
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 15px 17px;
+
+  text-align: left;
+
+  border-bottom: 1px solid #555;
+
+  font-size: 17px;
+}
+
+th {
+  color: #999;
+
+  background: #191919;
+
+  font-weight: 400;
+}
+
+tbody tr:hover {
+  background: #202020;
+}
+
+td strong {
+  font-weight: 400;
+}
+
+td small {
+  display: block;
+
+  color: #777;
+
+  font-family:
+    "Space Mono",
+    monospace;
+
+  font-size: 9px;
+}
+
+.arrow-button {
+  background: transparent;
+
+  border: 1px solid #777;
+
+  color: white;
+
+  padding: 3px 10px;
+}
+
+.status {
+  border: 1px solid #777;
+
+  padding: 3px 10px;
+
+  border-radius: 999px;
+
+  font-size: 13px;
+}
+
+.status.active,
+.status.approved {
+  background: rgba(0,100,20,.35);
+
+  border-color: #3d8146;
+}
+
+.status.pending {
+  background: rgba(150,120,20,.2);
+
+  border-color: #9c8e49;
+}
+
+/* =====================================================
+   STAT CARDS
+===================================================== */
+
+.stats-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 18px;
+
+  margin-top: 20px;
+}
+
+.stat-title {
+  color: #999;
+}
+
+.stat-value {
+  display: block;
+
+  font-family:
+    "Space Mono",
+    monospace;
+
+  font-size: 40px;
+
+  font-weight: 400;
+
+  margin: 5px 0;
+}
+
+.stat-card small {
+  color: #777;
+}
+
+/* =====================================================
+   ATTENDANCE
+===================================================== */
+
+.attendance-toolbar {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-bottom: 18px;
+}
+
+.attendance-toolbar button,
+.attendance-toolbar input {
+  background: #171717;
+
+  border: 1px solid #777;
+
+  color: white;
+
+  padding: 8px 13px;
+}
+
+.attendance-search {
+  margin-left: auto;
+
+  width: 280px;
+}
+
+.attendance-date {
+  padding: 13px 16px;
+
+  border-bottom: 1px solid #666;
+}
+
+/* =====================================================
+   NOTE
+===================================================== */
+
+.note-box {
+  margin-top: 20px;
+
+  max-width: 680px;
+}
+
+.note-title {
+  display: inline-block;
+
+  border: 1px solid #777;
+
+  padding: 3px 22px;
+
+  font-size: 20px;
+}
+
+.note-box p {
+  color: #aaa;
+
+  line-height: 1.4;
+}
+
+/* =====================================================
+   TIME OFF
+===================================================== */
+
+.action-buttons {
+  display: flex;
+
+  gap: 5px;
+}
+
+.action-buttons button {
+  background: #191919;
+
+  border: 1px solid #777;
+
+  color: white;
+
+  padding: 6px 10px;
+}
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.profile-page-heading {
+  margin-bottom: 20px;
+}
+
+.back-button {
+  background: transparent;
+
+  border: 0;
+
+  color: #aaa;
+
+  padding: 0;
+
+  margin-bottom: 7px;
+
+  font-size: 17px;
+}
+
+.profile-header {
+  display: flex;
+
+  gap: 25px;
+}
+
+.profile-avatar {
+  width: 115px;
+  height: 115px;
+
+  flex-shrink: 0;
+
+  border: 1px solid #aaa;
+
+  border-radius: 50%;
+
+  display: grid;
+  place-items: center;
+
+  background: #713f3f;
+
+  font-size: 38px;
+}
+
+.profile-header-content {
+  flex: 1;
+}
+
+.profile-header h2 {
+  margin: 0;
+
+  font-size: 35px;
+
+  font-weight: 400;
+}
+
+.profile-position {
+  color: #888;
+}
+
+.profile-info-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 12px 22px;
+
+  margin-top: 18px;
+}
+
+.profile-info {
+  border-bottom: 1px solid #555;
+
+  padding-bottom: 5px;
+}
+
+.profile-info span {
+  display: block;
+
+  color: #777;
+
+  font-size: 13px;
+}
+
+.profile-info strong {
+  font-weight: 400;
+}
+
+/* =====================================================
+   PROFILE TABS
+===================================================== */
+
+.profile-tabs {
+  display: flex;
+
+  margin: 20px 0;
+
+  border-bottom: 1px solid #777;
+}
+
+.profile-tabs button {
+  background: #171717;
+
+  border: 1px solid #777;
+
+  border-bottom: 0;
+
+  color: #999;
+
+  padding: 9px 17px;
+}
+
+.profile-tabs button.active {
+  background: #292929;
+
+  color: white;
+}
+
+/* =====================================================
+   PROFILE COLUMNS
+===================================================== */
+
+.profile-columns {
+  display: grid;
+
+  grid-template-columns:
+    1.25fr .85fr;
+
+  gap: 18px;
+}
+
+.profile-columns > div > .wire-card {
+  margin-bottom: 18px;
+}
+
+.section-title {
+  margin: 0 0 15px;
+
+  font-size: 23px;
+
+  font-weight: 400;
+}
+
+textarea {
+  width: 100%;
+
+  min-height: 115px;
+
+  resize: vertical;
+
+  background: #131313;
+
+  border: 1px solid #666;
+
+  padding: 10px;
+
+  outline: none;
+
+  margin-bottom: 18px;
+
+  line-height: 1.3;
+}
+
+.chips {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-bottom: 15px;
+}
+
+.chip {
+  border: 1px solid #777;
+
+  background: #1b1b1b;
+
+  padding: 5px 10px;
+}
+
+.add-button {
+  background: transparent;
+
+  border: 0;
+
+  color: #aaa;
+}
+
+/* =====================================================
+   PROFILE FIELDS
+===================================================== */
+
+.profile-field {
+  display: grid;
+
+  grid-template-columns:
+    160px 1fr;
+
+  gap: 15px;
+
+  align-items: center;
+
+  margin: 12px 0;
+}
+
+.profile-field span {
+  color: #888;
+}
+
+.profile-field input {
+  background: transparent;
+
+  border: 0;
+
+  border-bottom: 1px solid #555;
+
+  padding: 7px 3px;
+
+  outline: none;
+}
+
+/* =====================================================
+   SALARY
+===================================================== */
+
+.salary-warning {
+  border: 1px solid #75683c;
+
+  background: rgba(130,100,20,.13);
+
+  color: #c9bd83;
+
+  padding: 12px 15px;
+
+  margin-bottom: 18px;
+}
+
+.salary-summary {
+  margin-bottom: 18px;
+}
+
+.salary-heading {
+  display: inline-block;
+
+  border: 1px solid #777;
+
+  padding: 6px 18px;
+
+  margin-bottom: 18px;
+}
+
+.salary-summary-grid {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr 1.3fr;
+
+  gap: 25px;
+}
+
+.salary-summary-grid span {
+  display: block;
+
+  color: #888;
+}
+
+.salary-summary-grid strong {
+  display: inline-block;
+
+  font-family:
+    "Space Mono",
+    monospace;
+
+  font-size: 22px;
+
+  font-weight: 400;
+
+  margin-right: 8px;
+}
+
+.salary-summary-grid small {
+  color: #777;
+}
+
+.salary-tabs {
+  display: flex;
+
+  gap: 5px;
+
+  margin-bottom: 18px;
+}
+
+.salary-tabs button {
+  background: #191919;
+
+  border: 1px solid #777;
+
+  color: #999;
+
+  padding: 9px 14px;
+}
+
+.salary-tabs button.active {
+  background: #ddd8cf;
+
+  color: #111;
+}
+
+.salary-row {
+  display: grid;
+
+  grid-template-columns:
+    1.7fr 1fr;
+
+  padding: 13px 0;
+
+  border-bottom: 1px solid #555;
+}
+
+.salary-row strong {
+  font-weight: 400;
+}
+
+.salary-row small {
+  display: block;
+
+  color: #777;
+
+  margin-top: 3px;
+}
+
+.salary-total {
+  display: flex;
+
+  justify-content: space-between;
+
+  padding-top: 17px;
+
+  margin-top: 10px;
+
+  border-top: 1px solid #aaa;
+}
+
+.salary-total strong {
+  font-family:
+    "Space Mono",
+    monospace;
+
+  font-weight: 400;
+}
+
+.payable-days {
+  font-family:
+    "Space Mono",
+    monospace;
+
+  font-size: 55px;
+
+  margin: 20px 0;
+}
+
+.payable-days small {
+  color: #777;
+
+  font-size: 17px;
+}
+
+.payroll-row {
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: 14px 0;
+
+  border-bottom: 1px solid #555;
+}
+
+.payroll-row strong {
+  font-family:
+    "Space Mono",
+    monospace;
+
+  font-weight: 400;
+}
+
+.payroll-row.final {
+  border-top: 2px solid #aaa;
+
+  border-bottom: 0;
+
+  margin-top: 10px;
+
+  font-size: 20px;
+}
+
+/* =========================================================
+   REPORTS & ANALYTICS
+========================================================= */
+
+.reports-page {
+  width: 100%;
+}
+
+/* Page header */
+
+.reports-page .page-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.section-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 500;
+  color: #f1f1f1;
+}
+
+.section-description {
+  margin: 6px 0 0;
+  color: #888;
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   REPORT STAT CARDS
+========================================================= */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.stat-card {
+  position: relative;
+  background: #171717;
+  border: 1px solid #4b4b4b;
+  padding: 20px;
+  min-height: 120px;
+  transition: border-color 0.2s ease,
+              transform 0.2s ease;
+}
+
+.stat-card:hover {
+  border-color: #777;
+  transform: translateY(-2px);
+}
+
+.stat-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat-card-title {
+  color: #999;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.stat-card-icon {
+  color: #aaa;
+  font-size: 17px;
+}
+
+.stat-card-value {
+  margin-top: 15px;
+  color: #f2f2f2;
+  font-family: "Space Mono", monospace;
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.stat-card-subtitle {
+  margin-top: 5px;
+  color: #777;
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   REPORT PANELS
+========================================================= */
+
+.reports-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.panel {
+  background: #171717;
+  border: 1px solid #4b4b4b;
+  padding: 22px;
+}
+
+.panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.panel-header h3 {
+  margin: 0;
+  color: #ededed;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.panel-header p {
+  margin: 5px 0 0;
+  color: #777;
+  font-size: 13px;
+}
+
+.panel-icon {
+  color: #aaa;
+  font-size: 18px;
+}
+
+
+/* =========================================================
+   ATTENDANCE CHART
+========================================================= */
+
+.chart {
+  height: 230px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+
+  padding: 20px 30px 0;
+
+  border-bottom: 1px solid #444;
+}
+
+.chart-bar-container {
+  height: 100%;
+  min-width: 70px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.chart-bar {
+  width: 42px;
+  min-height: 12px;
+
+  border: 1px solid #888;
+
+  transition:
+    height 0.3s ease,
+    opacity 0.2s ease;
+}
+
+.chart-bar:hover {
+  opacity: 0.75;
+}
+
+.present-bar {
+  background: #4f7355;
+}
+
+.absent-bar {
+  background: #713f3f;
+}
+
+.leave-bar {
+  background: #75663b;
+}
+
+.chart-bar-container span {
+  margin-top: 9px;
+  color: #999;
+  font-size: 13px;
+}
+
+.chart-bar-container small {
+  margin-top: 3px;
+  color: #666;
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   ATTENDANCE SUMMARY
+========================================================= */
+
+.report-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  margin-top: 18px;
+
+  border-top: 1px solid #444;
+}
+
+.report-summary div {
+  padding: 13px;
+  text-align: center;
+  border-right: 1px solid #444;
+}
+
+.report-summary div:last-child {
+  border-right: none;
+}
+
+.report-summary span {
+  display: block;
+  color: #777;
+  font-size: 12px;
+}
+
+.report-summary strong {
+  display: block;
+  margin-top: 5px;
+
+  color: #eee;
+
+  font-family: "Space Mono", monospace;
+  font-size: 21px;
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   PAYROLL REPORT
+========================================================= */
+
+.payroll-report {
+  display: flex;
+  flex-direction: column;
+}
+
+.payroll-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 13px 0;
+
+  border-bottom: 1px solid #383838;
+}
+
+.employee-cell {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.employee-cell strong {
+  display: block;
+  color: #ddd;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.employee-cell small {
+  display: block;
+  margin-top: 3px;
+  color: #666;
+  font-size: 11px;
+}
+
+.employee-avatar {
+  width: 36px;
+  height: 36px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid #666;
+  border-radius: 50%;
+
+  background: #252525;
+  color: #ddd;
+
+  font-size: 13px;
+}
+
+.payroll-row > strong {
+  color: #ddd;
+
+  font-family: "Space Mono", monospace;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.payroll-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 15px;
+  padding-top: 15px;
+
+  border-top: 1px solid #777;
+}
+
+.payroll-total span {
+  color: #999;
+  font-size: 13px;
+}
+
+.payroll-total strong {
+  color: #f1f1f1;
+
+  font-family: "Space Mono", monospace;
   font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   WORKFORCE REPORT
+========================================================= */
+
+.workforce-report {
+  margin-bottom: 25px;
+}
+
+.workforce-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 1px;
+
+  background: #444;
+  border: 1px solid #444;
+}
+
+.workforce-item {
+  padding: 20px;
+  background: #171717;
+}
+
+.workforce-item span {
+  display: block;
+  color: #777;
+  font-size: 12px;
+}
+
+.workforce-item strong {
+  display: block;
+  margin-top: 8px;
+
+  color: #eee;
+
+  font-family: "Space Mono", monospace;
+  font-size: 28px;
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   NOTIFICATIONS
+========================================================= */
+
+.notification-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.notification-item {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 15px;
+
+  padding: 18px 4px;
+
+  border-bottom: 1px solid #3d3d3d;
+
+  transition:
+    background 0.2s ease,
+    padding-left 0.2s ease;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-item:hover {
+  background: #1c1c1c;
+  padding-left: 10px;
+}
+
+
+/* Notification icon */
+
+.notification-icon {
+  flex-shrink: 0;
+
+  width: 40px;
+  height: 40px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid #555;
+  border-radius: 50%;
+
+  background: #222;
+  color: #aaa;
+
+  font-size: 15px;
+}
+
+
+/* Notification content */
+
+.notification-content {
+  flex: 1;
+}
+
+.notification-content strong {
+  display: block;
+
+  color: #e5e5e5;
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.notification-content p {
+  margin: 5px 0;
+
+  color: #888;
+
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.notification-content span {
+  color: #5f5f5f;
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   NOTIFICATION PAGE
+========================================================= */
+
+.page-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 24px;
+}
+
+.secondary-button {
+  padding: 9px 15px;
+
+  border: 1px solid #666;
+  border-radius: 3px;
+
+  background: transparent;
+  color: #bbb;
+
+  font-family: inherit;
+  font-size: 12px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.secondary-button:hover {
+  background: #252525;
+  border-color: #999;
+  color: #eee;
+}
+
+
+/* =========================================================
+   NOTIFICATION PANEL
+========================================================= */
+
+.notification-list {
+  min-height: 250px;
+}
+
+.notification-item:first-child {
+  padding-top: 5px;
+}
+
+/* =========================================================
+   ADMIN - MY PROFILE
+========================================================= */
+
+.admin-my-profile {
+  width: 100%;
+  color: #d8d8d8;
+  font-family: inherit;
+  padding-bottom: 50px;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.my-profile-title {
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 14px;
+
+  border: 1px solid #777;
+
+  color: #dcdcdc;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  background: #111;
+}
+
+
+/* =========================================================
+   PROFILE HEADER
+========================================================= */
+
+.admin-profile-header {
+  display: flex;
+  align-items: center;
+
+  gap: 28px;
+
+  min-height: 145px;
+
+  padding: 20px 25px;
+
+  border-left: 1px solid #777;
+  border-right: 1px solid #777;
+  border-bottom: 1px solid #777;
+
+  background: #111;
+}
+
+
+/* =========================================================
+   ADMIN AVATAR
+========================================================= */
+
+.admin-avatar-wrapper {
+  position: relative;
+
+  flex-shrink: 0;
+}
+
+.admin-avatar {
+  width: 105px;
+  height: 105px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid #aaa;
+  border-radius: 50%;
+
+  background: #693b3b;
+
+  color: #111;
+
+  font-size: 35px;
+}
+
+.avatar-edit {
+  position: absolute;
+
+  right: 5px;
+  bottom: 3px;
+
+  width: 28px;
+  height: 28px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid #888;
+  border-radius: 50%;
+
+  background: #181818;
+
+  color: #ccc;
+
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+.avatar-edit:hover {
+  background: #292929;
+}
+
+
+/* =========================================================
+   BASIC INFO
+========================================================= */
+
+.admin-basic-info {
+  flex: 1;
+}
+
+.admin-basic-info h1 {
+  margin: 0 0 12px;
+
+  color: #e2e2e2;
+
+  font-size: 23px;
+  font-weight: 500;
+}
+
+.admin-basic-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(150px, 1fr)
+    minmax(150px, 1fr);
+
+  column-gap: 45px;
+
+  row-gap: 8px;
+
+  max-width: 650px;
+}
+
+.admin-basic-grid div {
+  display: flex;
+  align-items: center;
+}
+
+.admin-basic-grid span {
+  width: 85px;
+
+  color: #777;
+
+  font-size: 10px;
+}
+
+.admin-basic-grid strong {
+  min-width: 100px;
+
+  padding-bottom: 3px;
+
+  border-bottom: 1px solid #555;
+
+  color: #c8c8c8;
+
+  font-size: 11px;
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   TABS
+========================================================= */
+
+.admin-profile-tabs {
+  display: flex;
+
+  padding-left: 10px;
+
+  border-left: 1px solid #777;
+  border-right: 1px solid #777;
+  border-bottom: 1px solid #777;
+
+  background: #111;
+}
+
+.admin-tab {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  min-height: 38px;
+
+  padding: 0 15px;
+
+  border: none;
+  border-right: 1px solid #777;
+
+  background: #151515;
+
+  color: #aaa;
+
+  font-family: inherit;
+
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+.admin-tab:first-child {
+  border-left: 1px solid #777;
+}
+
+.admin-tab:hover {
+  background: #222;
+  color: #ddd;
+}
+
+.admin-tab.active {
+  background: #202020;
+  color: #eee;
+
+  box-shadow:
+    inset 0 -2px 0 #aaa;
+}
+
+.admin-tab svg {
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   TAB CONTENT
+========================================================= */
+
+.admin-profile-tab-content {
+  border-left: 1px solid #777;
+  border-right: 1px solid #777;
+  border-bottom: 1px solid #777;
+
+  background: #111;
+}
+
+
+/* =========================================================
+   RESUME
+========================================================= */
+
+.admin-profile-content {
+  padding: 25px;
+}
+
+.admin-profile-grid {
+  display: grid;
+
+  grid-template-columns:
+    1.25fr
+    0.95fr;
+
+  gap: 5px;
+}
+
+.admin-profile-box {
+  min-height: 150px;
+
+  padding: 15px;
+
+  border: 1px solid #555;
+
+  background: #111;
+}
+
+.admin-box-title {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding-bottom: 8px;
+
+  border-bottom: 1px solid #555;
+
+  color: #ddd;
+
+  font-size: 13px;
+}
+
+.admin-box-title svg {
+  color: #777;
+  font-size: 9px;
+}
+
+.admin-profile-box p {
+  margin: 12px 0;
+
+  color: #888;
+
+  font-size: 11px;
+
+  line-height: 1.6;
+}
+
+.admin-profile-box h4 {
+  margin: 15px 0 5px;
+
+  color: #bbb;
+
+  font-size: 12px;
+
+  font-weight: 400;
+}
+
+.skill-list {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 6px;
+
+  margin-top: 12px;
+}
+
+.skill-list span {
+  padding: 5px 8px;
+
+  border: 1px solid #555;
+
+  color: #aaa;
+
+  font-size: 10px;
+}
+
+.add-item-button {
+  margin-top: 15px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #888;
+
+  font-family: inherit;
+
+  font-size: 10px;
+
+  cursor: pointer;
+}
+
+.add-item-button:hover {
+  color: #ddd;
+}
+
+
+/* =========================================================
+   PRIVATE INFORMATION
+========================================================= */
+
+.admin-info-columns {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 35px;
+}
+
+.admin-info-row {
+  display: grid;
+
+  grid-template-columns: 130px 1fr;
+
+  align-items: center;
+
+  min-height: 37px;
+
+  border-bottom: 1px solid #333;
+}
+
+.admin-info-row span {
+  color: #999;
+
+  font-size: 11px;
+}
+
+.admin-info-row strong {
+  color: #bbb;
+
+  font-size: 11px;
+
+  font-weight: 400;
+}
+
+.admin-bank-heading {
+  margin-bottom: 4px;
+
+  padding-bottom: 8px;
+
+  border-bottom: 1px solid #555;
+
+  color: #ddd;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   SALARY INFORMATION
+========================================================= */
+
+.admin-salary-content {
+  padding: 25px;
+}
+
+.salary-admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 22px;
+
+  padding: 13px 15px;
+
+  border: 1px solid #666;
+
+  background: #171717;
+}
+
+.salary-admin-header h3 {
+  margin: 0;
+
+  color: #ddd;
+
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.salary-admin-header p {
+  margin: 5px 0 0;
+
+  color: #777;
+
+  font-size: 10px;
+}
+
+.admin-only-badge {
+  padding: 6px 9px;
+
+  border: 1px solid #7a6250;
+
+  background: #2a2119;
+
+  color: #c49e77;
+
+  font-size: 9px;
+
+  letter-spacing: 0.08em;
+}
+
+
+/* =========================================================
+   GENERAL SALARY
+========================================================= */
+
+.salary-general {
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    80px
+    1fr
+    130px;
+
+  border-top: 1px solid #555;
+  border-bottom: 1px solid #555;
+
+  margin-bottom: 25px;
+}
+
+.salary-general-item {
+  min-height: 55px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 10px 15px;
+
+  border-right: 1px solid #444;
+}
+
+.salary-general-item:last-child {
+  border-right: none;
+}
+
+.salary-general-item span {
+  color: #888;
+
+  font-size: 10px;
+}
+
+.salary-general-item strong {
+  margin-left: auto;
+
+  color: #ddd;
+
+  font-family: "Space Mono", monospace;
+
+  font-size: 13px;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   TWO COLUMNS
+========================================================= */
+
+.salary-two-column {
+  display: grid;
+
+  grid-template-columns: 1.1fr 0.9fr;
+
+  gap: 35px;
+}
+
+.salary-column-title {
+  margin: 0 0 12px;
+
+  padding-bottom: 8px;
+
+  border-bottom: 1px solid #555;
+
+  color: #bbb;
+
+  font-size: 12px;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   SALARY COMPONENT
+========================================================= */
+
+.salary-component {
+  padding: 9px 0;
+
+  border-bottom: 1px solid #333;
+}
+
+.salary-component-heading {
+  display: grid;
+
+  grid-template-columns: 1fr 115px 65px;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.salary-component-heading span {
+  color: #aaa;
+
+  font-size: 10px;
+}
+
+.salary-component-heading strong {
+  text-align: right;
+
+  color: #ccc;
+
+  font-family: "Space Mono", monospace;
+
+  font-size: 10px;
+
+  font-weight: 400;
+}
+
+.salary-component-heading em {
+  text-align: right;
+
+  color: #aaa;
+
+  font-size: 9px;
+
+  font-style: normal;
+}
+
+.salary-component p {
+  margin: 5px 0 0;
+
+  color: #666;
+
+  font-size: 9px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   PF
+========================================================= */
+
+.pf-row {
+  display: grid;
+
+  grid-template-columns: 1fr 110px 55px;
+
+  align-items: center;
+
+  padding: 10px 0;
+
+  border-bottom: 1px solid #333;
+}
+
+.pf-row span {
+  color: #999;
+
+  font-size: 10px;
+}
+
+.pf-row strong {
+  text-align: right;
+
+  color: #ccc;
+
+  font-family: "Space Mono", monospace;
+
+  font-size: 10px;
+
+  font-weight: 400;
+}
+
+.pf-row em {
+  text-align: right;
+
+  color: #aaa;
+
+  font-size: 9px;
+
+  font-style: normal;
+}
+
+.pf-description {
+  margin: 5px 0 12px;
+
+  color: #666;
+
+  font-size: 9px;
+
+  line-height: 1.4;
+}
+
+.tax-title {
+  margin-top: 25px;
+}
+
+
+/* =========================================================
+   SALARY TOTALS
+========================================================= */
+
+.salary-total-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 22px;
+
+  padding: 13px;
+
+  border: 1px solid #555;
+
+  background: #171717;
+}
+
+.salary-total-box span {
+  color: #888;
+
+  font-size: 10px;
+}
+
+.salary-total-box strong {
+  color: #ddd;
+
+  font-family: "Space Mono", monospace;
+
+  font-size: 13px;
+
+  font-weight: 400;
+}
+
+.salary-net-box {
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 10px;
+
+  padding: 15px;
+
+  border: 1px solid #777;
+
+  background: #202020;
+}
+
+.salary-net-box span {
+  color: #888;
+
+  font-size: 10px;
+}
+
+.salary-net-box strong {
+  margin-top: 4px;
+
+  color: #eee;
+
+  font-family: "Space Mono", monospace;
+
+  font-size: 21px;
+
+  font-weight: 400;
+}
+
+.salary-net-box small {
+  margin-top: 4px;
+
+  color: #666;
+
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   SECURITY
+========================================================= */
+
+.security-grid {
+  display: flex;
+  flex-direction: column;
+
+  gap: 1px;
+
+  border: 1px solid #444;
+}
+
+.security-item {
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 16px;
+
+  background: #151515;
+
+  border-bottom: 1px solid #333;
+}
+
+.security-item:last-child {
+  border-bottom: none;
+}
+
+.security-icon {
+  width: 35px;
+  height: 35px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid #555;
+
+  color: #999;
+
+  font-size: 12px;
+}
+
+.security-item div:nth-child(2) {
+  flex: 1;
+}
+
+.security-item strong {
+  display: block;
+
+  color: #ccc;
+
+  font-size: 12px;
+
+  font-weight: 400;
+}
+
+.security-item p {
+  margin: 4px 0 0;
+
+  color: #666;
+
+  font-size: 10px;
+}
+
+.security-item button {
+  padding: 6px 12px;
+
+  border: 1px solid #555;
+
+  background: transparent;
+
+  color: #aaa;
+
+  font-family: inherit;
+
+  font-size: 10px;
+
+  cursor: pointer;
+}
+
+.security-item button:hover {
+  background: #252525;
+  color: #ddd;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .admin-profile-header {
+    align-items: flex-start;
+  }
+
+  .admin-basic-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .salary-two-column {
+    grid-template-columns: 1fr;
+  }
+
+  .salary-general {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .salary-general-item {
+    border-bottom: 1px solid #444;
+  }
+
+  .admin-info-columns {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .admin-profile-header {
+    flex-direction: column;
+  }
+
+  .admin-profile-tabs {
+    overflow-x: auto;
+  }
+
+  .admin-tab {
+    white-space: nowrap;
+  }
+
+  .admin-profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .salary-general {
+    grid-template-columns: 1fr;
+  }
+
+  .salary-component-heading {
+    grid-template-columns: 1fr 100px;
+  }
+
+  .salary-component-heading em {
+    display: none;
+  }
+
+  .admin-info-row {
+    grid-template-columns: 1fr;
+    gap: 5px;
+
+    padding: 8px 0;
+  }
+
+}
+
+@media (max-width: 1000px) {
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .reports-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .workforce-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .workforce-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-actions {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .chart {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .chart-bar {
+    width: 30px;
+  }
+
+  .chart-bar-container {
+    min-width: 50px;
+  }
+
+  .notification-item {
+    padding: 15px 2px;
+  }
+
+}
+
+@media (max-width: 1000px) {
+
+  .navbar {
+    flex-wrap: wrap;
+
+    height: auto;
+
+    padding: 14px 20px;
+  }
+
+  .nav-links {
+    order: 3;
+
+    width: 100%;
+  }
+
+  .admin-label {
+    display: none;
+  }
+
+  .profile-info-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .profile-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .salary-summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+
+  .page {
+    padding: 30px 16px 80px;
+  }
+
+  h1 {
+    font-size: 38px;
+  }
+
+  .page-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .profile-header {
+    flex-direction: column;
+  }
+
+  .profile-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search-bar input {
+    width: 100%;
+  }
+
+  .profile-tabs {
+    overflow-x: auto;
+  }
+
+  .profile-tabs button {
+    white-space: nowrap;
+  }
+
+  .attendance-toolbar {
+    flex-wrap: wrap;
+  }
+
+  .attendance-search {
+    width: 100%;
+
+    margin-left: 0;
+  }
+
+  .salary-tabs {
+    overflow-x: auto;
+  }
+
+  .salary-tabs button {
+    white-space: nowrap;
+  }
+
+  .profile-field {
+    grid-template-columns: 1fr;
+
+    gap: 3px;
+  }
 }
