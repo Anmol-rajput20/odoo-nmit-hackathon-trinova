@@ -147,3 +147,17 @@ def upload_avatar(
     db.commit()
 
     return {"message": "Avatar uploaded successfully", "avatar_url": profile.profile_picture}
+
+# Add these helper endpoints at the bottom of app/api/v1/endpoints/users.py
+
+@router.get("/employees", response_model=List[UserDetailOut], tags=["Employees Compatibility"])
+def list_employees_alias(db: Session = Depends(get_db)):
+    return list_all_users(db=db)
+
+@router.get("/employees/{emp_id}", response_model=UserDetailOut, tags=["Employees Compatibility"])
+def get_employee_alias(
+    emp_id: str, 
+    db: Session = Depends(get_db), 
+    current_user: User = Depends(get_current_user)
+):
+    return get_user_by_emp_id(emp_id=emp_id, db=db, current_user=current_user)
