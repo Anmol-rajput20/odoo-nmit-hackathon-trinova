@@ -1,5 +1,7 @@
+import { useState } from "react";
+
 import {
-  leaveRequests
+  leaveRequests as initialLeaveRequests,
 } from "../data/employees";
 
 import PageHeader from "../components/PageHeader";
@@ -7,15 +9,91 @@ import StatCard from "../components/StatCard";
 
 export default function TimeOff() {
 
+  const [requests, setRequests] =
+    useState(initialLeaveRequests);
+
   const pending =
-    leaveRequests.filter(
-      (x) => x.status === "Pending"
+    requests.filter(
+      (request) =>
+        request.status === "Pending"
     ).length;
 
   const approved =
-    leaveRequests.filter(
-      (x) => x.status === "Approved"
+    requests.filter(
+      (request) =>
+        request.status === "Approved"
     ).length;
+
+  const rejected =
+    requests.filter(
+      (request) =>
+        request.status === "Rejected"
+    ).length;
+
+
+  /* =========================================
+     APPROVE REQUEST
+  ========================================= */
+
+  const handleApprove = (index) => {
+
+    const request =
+      requests[index];
+
+    const confirmed =
+      window.confirm(
+        `Approve leave request for ${request.employee}?`
+      );
+
+    if (!confirmed) {
+      return;
+    }
+
+    setRequests((currentRequests) =>
+      currentRequests.map(
+        (item, itemIndex) =>
+          itemIndex === index
+            ? {
+                ...item,
+                status: "Approved",
+              }
+            : item
+      )
+    );
+  };
+
+
+  /* =========================================
+     REJECT REQUEST
+  ========================================= */
+
+  const handleReject = (index) => {
+
+    const request =
+      requests[index];
+
+    const confirmed =
+      window.confirm(
+        `Reject leave request for ${request.employee}?`
+      );
+
+    if (!confirmed) {
+      return;
+    }
+
+    setRequests((currentRequests) =>
+      currentRequests.map(
+        (item, itemIndex) =>
+          itemIndex === index
+            ? {
+                ...item,
+                status: "Rejected",
+              }
+            : item
+      )
+    );
+  };
+
 
   return (
     <section className="page">
@@ -23,13 +101,13 @@ export default function TimeOff() {
       <PageHeader
         eyebrow="TIME OFF"
         title="Leave & Time Off"
-        description="Review employee leave requests."
-        action={
-          <button className="primary-button">
-            + Request Time Off
-          </button>
-        }
+        description="Review and manage employee leave requests."
       />
+
+
+      {/* =========================================
+          STATISTICS
+      ========================================= */}
 
       <div className="stats-grid">
 
@@ -46,12 +124,23 @@ export default function TimeOff() {
         />
 
         <StatCard
+          title="Rejected"
+          value={rejected}
+          description="Rejected requests"
+        />
+
+        <StatCard
           title="Total"
-          value={leaveRequests.length}
+          value={requests.length}
           description="Leave requests"
         />
 
       </div>
+
+
+      {/* =========================================
+          LEAVE REQUEST TABLE
+      ========================================= */}
 
       <div className="wire-card table-wrapper">
 
@@ -69,39 +158,52 @@ export default function TimeOff() {
 
           </thead>
 
+
           <tbody>
 
-            {leaveRequests.map(
+            {requests.map(
               (request, index) => (
 
                 <tr key={index}>
 
                   <td>
-                    {request.employee}
+                    <strong>
+                      {request.employee}
+                    </strong>
                   </td>
+
 
                   <td>
                     {request.type}
                   </td>
 
+
                   <td>
                     {request.dates}
                   </td>
 
+
                   <td>
 
                     <span
-                      className={
-                        request.status ===
-                        "Approved"
-                          ? "status approved"
-                          : "status pending"
-                      }
+                      className={`
+                        status
+                        ${
+                          request.status ===
+                          "Approved"
+                            ? "approved"
+                            : request.status ===
+                              "Rejected"
+                            ? "rejected"
+                            : "pending"
+                        }
+                      `}
                     >
                       {request.status}
                     </span>
 
                   </td>
+
 
                   <td>
 
@@ -110,15 +212,46 @@ export default function TimeOff() {
 
                       <div className="action-buttons">
 
-                        <button>
-                          Approve
+                        <button
+                          className="approve-button"
+                          onClick={() =>
+                            handleApprove(index)
+                          }
+                        >
+                          ✓ Approve
                         </button>
 
-                        <button>
-                          Reject
+
+                        <button
+                          className="reject-button"
+                          onClick={() =>
+                            handleReject(index)
+                          }
+                        >
+                          ✕ Reject
                         </button>
 
                       </div>
+
+                    )}
+
+
+                    {request.status ===
+                      "Approved" && (
+
+                      <span className="action-completed">
+                        Approved
+                      </span>
+
+                    )}
+
+
+                    {request.status ===
+                      "Rejected" && (
+
+                      <span className="action-completed rejected-text">
+                        Rejected
+                      </span>
 
                     )}
 

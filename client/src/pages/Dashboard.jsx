@@ -1,42 +1,32 @@
 import { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   employees,
   attendanceData,
-  leaveRequests
+  leaveRequests,
 } from "../data/employees";
 
 import PageHeader from "../components/PageHeader";
 import StatCard from "../components/StatCard";
 import EmployeeTable from "../components/EmployeeTable";
 
-export default function Dashboard({
-  onOpenProfile
-}) {
-  const [search, setSearch] =
-    useState("");
+export default function Dashboard() {
+  const navigate = useNavigate();
 
-  const filteredEmployees =
-    useMemo(() => {
+  const [search, setSearch] = useState("");
 
-      return employees.filter(
-        (employee) =>
-          `${employee.name}
-           ${employee.id}
-           ${employee.department}`
-            .toLowerCase()
-            .includes(
-              search.toLowerCase()
-            )
-      );
+  const filteredEmployees = useMemo(() => {
+    return employees.filter((employee) =>
+      `${employee.name} ${employee.id} ${employee.department}`
+        .toLowerCase()
+        .includes(search.toLowerCase())
+    );
+  }, [search]);
 
-    }, [search]);
-
-  const pendingLeaves =
-    leaveRequests.filter(
-      (leave) =>
-        leave.status === "Pending"
-    ).length;
+  const pendingLeaves = leaveRequests.filter(
+    (leave) => leave.status === "Pending"
+  ).length;
 
   return (
     <section className="page">
@@ -46,7 +36,10 @@ export default function Dashboard({
         title="Employees"
         description="Manage employee records, profiles and salary configuration."
         action={
-          <button className="primary-button">
+          <button
+            className="primary-button"
+            onClick={() => navigate("/employees/add")}
+          >
             + Add Employee
           </button>
         }
@@ -55,18 +48,16 @@ export default function Dashboard({
       <div className="search-bar">
 
         <input
+          type="text"
           placeholder="Search employee, department or ID"
           value={search}
-          onChange={(e) =>
-            setSearch(e.target.value)
-          }
+          onChange={(e) => setSearch(e.target.value)}
         />
 
       </div>
 
       <EmployeeTable
         employees={filteredEmployees}
-        onSelect={onOpenProfile}
       />
 
       <div className="stats-grid">

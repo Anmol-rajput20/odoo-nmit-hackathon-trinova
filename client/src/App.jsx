@@ -13,6 +13,7 @@ import Attendance from "./pages/Attendance";
 import TimeOff from "./pages/TimeOff";
 import Reports from "./pages/Reports";
 import Notifications from "./pages/Notifications";
+import AddEmployee from "./pages/AddEmployee";
 
 function Layout() {
   const location = useLocation();
@@ -55,6 +56,7 @@ function Layout() {
             <Route path="*" element={<Dashboard />}/>
             <Route path="/reports" element={<Reports />}/>
             <Route path="/notifications" element={<Notifications />}/>
+            <Route path="/employees/add" element={<AddEmployee />} />
           </Routes>
         </div>
       </main>
