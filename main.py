@@ -5,14 +5,14 @@ from fastapi.staticfiles import StaticFiles
 
 from app.core.config import settings
 from app.core.database import Base, engine
-from app.api.v1.endpoints import auth, users
+from app.models import payroll
+from app.api.v1.endpoints import auth, users, payroll as payroll_router
 
-# Create all MySQL tables
+# Automatically create all tables
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title=settings.PROJECT_NAME)
 
-# CORS config
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -21,13 +21,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount static uploads
+# Static files
 os.makedirs("uploads/avatars", exist_ok=True)
 app.mount("/static", StaticFiles(directory="uploads"), name="static")
 
-# Include Routers
+# Routers
 app.include_router(auth.router, prefix="/api/v1")
 app.include_router(users.router, prefix="/api/v1")
+app.include_router(payroll_router.router, prefix="/api/v1")
 
 @app.get("/")
 def root():
