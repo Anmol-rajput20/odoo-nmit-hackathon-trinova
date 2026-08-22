@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./MyProfile.css";
 import Navbar from "../components/Navbar";
+import { getEmployee, getMyPayroll } from "../services/api";
 
 const MyProfile = () => {
   const [activeTab, setActiveTab] = useState("private");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   const [employee, setEmployee] = useState({
     name: "My Name",
@@ -53,6 +56,47 @@ const MyProfile = () => {
     pfRate: 12,
     professionalTax: 200,
   });
+
+  useEffect(() => {
+  const loadProfile = async () => {
+    try {
+      setLoading(true);
+      setError("");
+
+      // Temporary until authentication is connected
+      const empId = "EMP001";
+
+      const employeeData = await getEmployee(empId);
+
+      console.log("Employee API response:", employeeData);
+
+      setEmployee((prev) => ({
+        ...prev,
+
+        name: `${employeeData.profile?.first_name || ""} ${
+          employeeData.profile?.last_name || ""
+        }`.trim(),
+
+        position: employeeData.profile?.job_title || "",
+        department: employeeData.profile?.department || "",
+        email: employeeData.email || "",
+        mobile: employeeData.profile?.phone || "",
+        address: employeeData.profile?.address || "",
+        employeeCode: employeeData.emp_id || "",
+      }));
+
+      // Payroll will be connected separately
+      // after we verify the employee API first.
+    } catch (err) {
+      console.error("Profile loading failed:", err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  loadProfile();
+}, []);
 
   const updateField = (field, value) => {
     setEmployee((prev) => ({
@@ -163,7 +207,17 @@ const MyProfile = () => {
     <div className="profile-page">
       <Navbar/>
       
+      {loading && (
+        <div className="profile-loading">
+        Loading profile...
+        </div>
+      )}
 
+      {error && (
+        <div className="profile-error">
+        {error}
+        </div>
+      )}
       {/* Page Title */}
       <div className="page-title">My Profile</div>
 
