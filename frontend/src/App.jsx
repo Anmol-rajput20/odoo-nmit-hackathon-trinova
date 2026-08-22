@@ -1,20 +1,29 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Dashboard from "./pages/Dashboard";
-import Profile from "./pages/Profile";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
+import Employees from "./pages/Employees";
+import EmployeeInfo from "./pages/EmployeeInfo";
+import MyProfile from "./pages/MyProfile";
 import Attendance from "./pages/Attendance";
-import Leave from "./pages/Leave";
-import Payroll from "./pages/Payroll";
+import TimeOff from "./pages/TimeOff";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/" element={<Navigate to="/employees" replace />} />
+
+        <Route path="/employees" element={<Employees />} />
+
+        <Route path="/employees/:id" element={<EmployeeInfo />} />
+
+        <Route path="/profile" element={<MyProfile />} />
+
         <Route path="/attendance" element={<Attendance />} />
-        <Route path="/leave" element={<Leave />} />
-        <Route path="/payroll" element={<Payroll />} />
+
+        <Route path="/time-off" element={<TimeOff />} />
+
+        <Route path="*" element={<Navigate to="/employees" replace />} />
       </Routes>
     </BrowserRouter>
   );
