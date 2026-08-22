@@ -2,7 +2,7 @@ from datetime import date, datetime
 
 from pydantic import BaseModel, ConfigDict
 
-from models import AttendanceStatus, LeaveStatus, UserRole
+from models import AttendanceStatus, LeaveStatus, LeaveType, UserRole
 
 
 class UserCreate(BaseModel):
@@ -66,10 +66,10 @@ class AttendanceResponse(BaseModel):
 
 class LeaveCreate(BaseModel):
     employee_id: int
-    leave_type: str
+    leave_type: LeaveType
     start_date: date
     end_date: date
-    reason: str | None = None
+    remarks: str | None = None
 
 
 class LeaveResponse(BaseModel):
@@ -77,8 +77,8 @@ class LeaveResponse(BaseModel):
 
     id: int
     employee_id: int
-    leave_type: str
+    leave_type: LeaveType
     start_date: date
     end_date: date
-    reason: str | None
+    remarks: str | None
     status: LeaveStatus

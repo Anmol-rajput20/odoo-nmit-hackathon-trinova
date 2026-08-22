@@ -20,10 +20,17 @@ class LeaveStatus(str, Enum):
     REJECTED = "rejected"
 
 
+class LeaveType(str, Enum):
+    PAID = "paid"
+    SICK = "sick"
+    UNPAID = "unpaid"
+
+
 class AttendanceStatus(str, Enum):
     PRESENT = "present"
     ABSENT = "absent"
     HALF_DAY = "half_day"
+    LEAVE = "leave"
 
 
 class User(Base):
@@ -130,8 +137,9 @@ class LeaveRequest(Base):
         nullable=False
     )
 
-    leave_type: Mapped[str] = mapped_column(
-        String(50),
+
+    leave_type: Mapped[LeaveType] = mapped_column(
+        SQLEnum(LeaveType),
         nullable=False
     )
 
