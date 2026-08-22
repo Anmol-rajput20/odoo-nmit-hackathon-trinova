@@ -1,24 +1,18 @@
 import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
-from app.core.config import settings
 
-# 1. Fetch URL from settings or direct environment fallback
-db_url = getattr(settings, "DATABASE_URL", None) or os.getenv("DATABASE_URL", "")
+# Default to local/render SQLite file if no cloud DB is provided
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./hrms.db")
 
-# 2. Fix driver prefix for MySQL on cloud providers (e.g. TiDB / Aiven / Render)
-if db_url.startswith("mysql://"):
-    db_url = db_url.replace("mysql://", "mysql+pymysql://", 1)
-
-# 3. Create engine with connection pooling and SSL compatibility
 connect_args = {}
-if "tidbcloud" in db_url or "aivencloud" in db_url or "ssl" in db_url.lower():
-    connect_args = {"ssl": {"ssl_mode": "REQUIRED"}}
+if DATABASE_URL.startswith("sqlite"):
+    connect_args = {"check_same_thread": False}
+elif DATABASE_URL.startswith("mysql://"):
+    DATABASE_URL = DATABASE_URL.replace("mysql://", "mysql+pymysql://", 1)
 
 engine = create_engine(
-    db_url,
-    pool_pre_ping=True,
-    pool_recycle=3600,
+    DATABASE_URL,
     connect_args=connect_args
 )
 
